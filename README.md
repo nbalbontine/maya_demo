@@ -1,4 +1,4 @@
-# Maya Components
+# MAYA DEMO
 
 A comprehensive UI component library built with Next.js, React, and shadcn/ui, featuring advanced 360° viewers, interactive maps, and modern navigation components.
 
@@ -28,8 +28,8 @@ A comprehensive UI component library built with Next.js, React, and shadcn/ui, f
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/maya-components.git
-cd maya-components
+git clone https://github.com/yourusername/maya-demo.git
+cd maya-demo
 ```
 
 2. Install dependencies:
@@ -47,14 +47,14 @@ npm run dev
 ## 📁 Project Structure
 
 ```
-Maya_components/
+MAYA_DEMO/
 ├── app/                    # Next.js App Router
 │   ├── ui-showcase/       # Component showcase page
 │   ├── demo/              # Demo pages
 │   └── ...
 ├── components/            
 │   ├── ui/               # shadcn/ui base components
-│   └── maya_components/  # Custom Maya components
+│   └── maya_components/  # Custom MAYA DEMO components
 │       ├── ui/           # Core Maya UI components
 │       ├── blocks/       # Composite components
 │       └── demos/        # Demo implementations
