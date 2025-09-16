@@ -20,6 +20,8 @@ import { Calendar } from "@/components/ui/calendar"
 import { useState } from "react"
 import Link from "next/link"
 import { Toaster } from "sonner"
+import SplitViewer from "@/components/maya_components/ui/split-viewer"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 export default function UIShowcase() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -537,6 +539,91 @@ export default function UIShowcase() {
           </Card>
         </section>
 
+        {/* Viewer Components */}
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold text-slate-900">Viewer Components</h2>
+          
+          {/* Split Viewer */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                🔄 Split Viewer with 360° Panoramas
+              </CardTitle>
+              <CardDescription>
+                Advanced dual-panel 360° panoramic viewer with synchronized or independent controls, time-based image switching, and interactive navigation
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Preview */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Preview</h4>
+                <div className="bg-slate-50 rounded-lg p-4 overflow-hidden">
+                  <div className="w-full h-64 bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex items-center justify-center relative">
+                    <div className="text-center space-y-2">
+                      <div className="text-slate-500 text-sm">Split Viewer Preview</div>
+                      <div className="text-xs text-slate-400">360° Panoramic Viewer with Dual Panels</div>
+                    </div>
+                    {/* Mini preview of split viewer interface */}
+                    <div className="absolute inset-4 bg-gradient-to-r from-blue-100 to-green-100 rounded border flex">
+                      <div className="flex-1 bg-blue-50 rounded-l border-r border-slate-200 flex items-center justify-center">
+                        <div className="text-xs text-blue-600">Left Panel</div>
+                      </div>
+                      <div className="w-1 bg-slate-300"></div>
+                      <div className="flex-1 bg-green-50 rounded-r flex items-center justify-center">
+                        <div className="text-xs text-green-600">Right Panel</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600">
+                  Compact preview showing the split-panel layout concept
+                </p>
+              </div>
+
+              {/* Full Screen Button */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Full Screen Experience</h4>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button size="lg" className="w-full">
+                      🔍 Open Full Screen Split Viewer
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="top" className="h-screen w-full max-w-none p-0">
+                    <SheetHeader className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur rounded-lg p-3">
+                      <SheetTitle>360° Split Viewer</SheetTitle>
+                    </SheetHeader>
+                    <div className="h-full w-full">
+                      <SplitViewer />
+                    </div>
+                  </SheetContent>
+                </Sheet>
+                <p className="text-sm text-slate-600">
+                  Experience the full split viewer with all interactive features
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Features</h4>
+                <ul className="text-sm text-slate-600 space-y-1 pl-4">
+                  <li>• Dual 360° panoramic viewers with independent or synchronized control</li>
+                  <li>• 5 high-quality day/night image pairs for time-based viewing</li>
+                  <li>• Interactive split-screen divider with mouse dragging</li>
+                  <li>• Lock/unlock mode for synchronized or independent navigation</li>
+                  <li>• Integrated top and bottom navigation components</li>
+                  <li>• Calendar-based image switching and time controls</li>
+                  <li>• Single/split view mode toggle</li>
+                  <li>• Smooth mouse and touch interactions for 360° exploration</li>
+                  <li>• Auto-rotation capability with customizable speed</li>
+                  <li>• Responsive design adapting to different screen sizes</li>
+                  <li>• WebGL-powered rendering for smooth performance</li>
+                  <li>• Memory-optimized image loading and caching</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
 
         {/* Base UI Components */}
         <section className="space-y-6">
@@ -605,9 +692,9 @@ export default function UIShowcase() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-blue-600">14</div>
+                <div className="text-3xl font-bold text-blue-600">15</div>
                 <p className="text-sm text-slate-600">Total Components</p>
               </div>
               <div className="text-center space-y-2">
@@ -617,6 +704,10 @@ export default function UIShowcase() {
               <div className="text-center space-y-2">
                 <div className="text-3xl font-bold text-purple-600">2</div>
                 <p className="text-sm text-slate-600">Map Components</p>
+              </div>
+              <div className="text-center space-y-2">
+                <div className="text-3xl font-bold text-indigo-600">1</div>
+                <p className="text-sm text-slate-600">Viewer Components</p>
               </div>
               <div className="text-center space-y-2">
                 <div className="text-3xl font-bold text-orange-600">100%</div>
