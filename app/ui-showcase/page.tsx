@@ -68,7 +68,7 @@ export default function UIShowcase() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-            MAYA DEMO UI Showcase
+            Maya Components UI Showcase
           </h1>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             Complete collection of Maya UI components with interactive demos. 
@@ -680,7 +680,7 @@ export default function UIShowcase() {
           <CardHeader>
             <CardTitle>Component Library Stats</CardTitle>
             <CardDescription>
-              Overview of the MAYA DEMO collection
+              Overview of the Maya Components collection
             </CardDescription>
           </CardHeader>
           <CardContent>

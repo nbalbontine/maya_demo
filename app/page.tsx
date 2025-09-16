@@ -11,7 +11,7 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-            MAYA DEMO
+            Maya Components
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             A collection of beautiful UI components built with shadcn/ui and Next.js.
@@ -120,7 +120,7 @@ export default function HomePage() {
         {/* About Section */}
         <Card>
           <CardHeader>
-            <CardTitle>About MAYA DEMO</CardTitle>
+            <CardTitle>About Maya Components</CardTitle>
             <CardDescription>
               A modern component library built with the latest technologies
             </CardDescription>

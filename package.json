@@ -1,7 +1,7 @@
 {
-  "name": "maya-demo",
+  "name": "maya_demo",
   "version": "1.0.0",
-  "description": "MAYA DEMO - A comprehensive UI component library built with Next.js, React, and shadcn/ui",
+  "description": "Maya Demo - A comprehensive UI component library built with Next.js, React, and shadcn/ui",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -63,7 +63,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/maya-demo.git"
+    "url": "https://github.com/nbalbontine/maya_demo.git"
   },
   "engines": {
     "node": ">=18.0.0",
