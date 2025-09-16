@@ -18,6 +18,7 @@ import DashboardSplitViewer from "@/components/maya_components/ui/dashboard-spli
 export default function Page() {
   return (
     <SidebarProvider
+      defaultOpen={false}
       style={
         {
           "--sidebar-width": "350px",
@@ -27,6 +28,8 @@ export default function Page() {
       <AppSidebar />
       <SidebarInset>
         <header className="bg-background/95 backdrop-blur-sm sticky top-0 flex shrink-0 items-center gap-2 border-b p-4 z-[1001]">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
