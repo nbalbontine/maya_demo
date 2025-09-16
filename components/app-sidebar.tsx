@@ -16,6 +16,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
 import { Switch } from "@/components/ui/switch"
@@ -227,10 +228,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <div className="text-foreground text-base font-medium">
               {activeItem?.title}
             </div>
-            <Label className="flex items-center gap-2 text-sm">
-              <span>Unreads</span>
-              <Switch className="shadow-none" />
-            </Label>
+            <div className="flex items-center gap-2">
+              <SidebarTrigger className="-ml-1" />
+              <Label className="flex items-center gap-2 text-sm">
+                <span>Unreads</span>
+                <Switch className="shadow-none" />
+              </Label>
+            </div>
           </div>
           <SidebarInput placeholder="Type to search..." />
         </SidebarHeader>
