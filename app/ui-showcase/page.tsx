@@ -16,7 +16,6 @@ import { SplitscreenToolbar } from "@/components/maya_components/ui/splitscreen-
 import { FloorMap } from "@/components/maya_components/ui/floor-map"
 import { GPSLocatorDemo } from "@/components/maya_components/ui/gps-locator"
 import { ToolbarMainDemo } from "@/components/maya_components/ui/toolbar-main"
-import { TestComponent } from "@/components/maya_components/ui/test_component"
 import { Calendar } from "@/components/ui/calendar"
 import { useState } from "react"
 import Link from "next/link"
@@ -538,84 +537,6 @@ export default function UIShowcase() {
           </Card>
         </section>
 
-        {/* Test Components */}
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold text-slate-900">Test Components</h2>
-          
-          {/* Test Component */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                🧪 Test Component
-              </CardTitle>
-              <CardDescription>
-                Interactive test component with animations, random values, and multiple variants for experimentation
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Default Variant */}
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Default Variant</h4>
-                <div className="bg-slate-50 rounded-lg p-4 flex justify-center">
-                  <TestComponent variant="default" size="md" />
-                </div>
-                <p className="text-sm text-slate-600">
-                  Clean white background with standard styling
-                </p>
-              </div>
-
-              {/* Colorful Variant */}
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Colorful Variant</h4>
-                <div className="bg-slate-50 rounded-lg p-4 flex justify-center">
-                  <TestComponent variant="colorful" size="md" />
-                </div>
-                <p className="text-sm text-slate-600">
-                  Gradient background with white text for vibrant displays
-                </p>
-              </div>
-
-              {/* Minimal Variant */}
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Minimal Variant</h4>
-                <div className="bg-slate-50 rounded-lg p-4 flex justify-center">
-                  <TestComponent variant="minimal" size="md" />
-                </div>
-                <p className="text-sm text-slate-600">
-                  Subtle gray background for minimal interfaces
-                </p>
-              </div>
-
-              {/* Size Variants */}
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Size Variants</h4>
-                <div className="bg-slate-50 rounded-lg p-4 flex justify-center gap-4 flex-wrap">
-                  <TestComponent variant="default" size="sm" />
-                  <TestComponent variant="default" size="md" />
-                  <TestComponent variant="default" size="lg" />
-                </div>
-                <p className="text-sm text-slate-600">
-                  Small (256×192px), Medium (320×256px), and Large (384×320px) sizes
-                </p>
-              </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Features</h4>
-                <ul className="text-sm text-slate-600 space-y-1 pl-4">
-                  <li>• Random number generation with smooth animations</li>
-                  <li>• Inspirational quotes that change on interaction</li>
-                  <li>• Color indicators with rotation and scaling effects</li>
-                  <li>• Click counter with reset functionality</li>
-                  <li>• Floating animated particles in background</li>
-                  <li>• Auto-updating random values every 3 seconds</li>
-                  <li>• Framer Motion animations throughout</li>
-                  <li>• Three distinct visual variants</li>
-                  <li>• Three responsive size options</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
 
         {/* Base UI Components */}
         <section className="space-y-6">
@@ -686,7 +607,7 @@ export default function UIShowcase() {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-blue-600">15</div>
+                <div className="text-3xl font-bold text-blue-600">14</div>
                 <p className="text-sm text-slate-600">Total Components</p>
               </div>
               <div className="text-center space-y-2">
@@ -694,7 +615,7 @@ export default function UIShowcase() {
                 <p className="text-sm text-slate-600">Toolbar Components</p>
               </div>
               <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-purple-600">4</div>
+                <div className="text-3xl font-bold text-purple-600">2</div>
                 <p className="text-sm text-slate-600">Map Components</p>
               </div>
               <div className="text-center space-y-2">
