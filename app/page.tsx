@@ -1,14 +1,23 @@
+"use client"
+
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import DashboardSplitViewer from "@/components/maya_components/ui/dashboard-split-viewer"
+import { Navbar06 } from "@/components/ui/shadcn-io/navbar-06"
 
 export default function HomePage() {
   return (
     <div className="h-screen flex flex-col">
-      <div className="w-full h-10 bg-blue-500 flex-shrink-0"></div>
+      <Navbar06 
+        className="flex-shrink-0"
+        onNavItemClick={(href) => console.log('Navigation clicked:', href)}
+        onLanguageChange={(lang) => console.log('Language changed:', lang)}
+        onThemeChange={(theme) => console.log('Theme changed:', theme)}
+        onUserItemClick={(item) => console.log('User menu clicked:', item)}
+      />
       <div className="flex-1 min-h-0">
         <SidebarProvider
           defaultOpen={false}
