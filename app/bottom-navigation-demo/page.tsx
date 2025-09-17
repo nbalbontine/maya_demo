@@ -38,7 +38,7 @@ export default function BottomNavigationDemo() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col relative">
       {/* Top Navigation */}
       <TopNavigation
         onBack={handleTopNavigation.onBack}
@@ -51,7 +51,7 @@ export default function BottomNavigationDemo() {
       <div className="flex-1"></div>
 
       {/* Bottom Navigation - Fixed at bottom */}
-      <div className="border-t border-gray-200 relative">
+      <div className="fixed bottom-0 left-0 right-0 border-t border-gray-200 bg-white">
         <BottomNavigation
           calendar={{
             date: currentDate,

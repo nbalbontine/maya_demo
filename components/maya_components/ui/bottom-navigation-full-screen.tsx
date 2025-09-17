@@ -72,8 +72,8 @@ const BottomNavigation = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "box-border flex items-end p-6 relative w-full",
-        "min-h-[80px]", // Ensure minimum height for proper spacing
+        "box-border flex items-end px-6 pt-6 pb-8 relative w-full",
+        "min-h-[100px]", // Ensure minimum height for proper spacing
         // Responsive behavior for smaller screens
         "sm:flex-row flex-col sm:gap-0 gap-4",
         disabled && "opacity-50 pointer-events-none",
