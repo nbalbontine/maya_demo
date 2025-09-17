@@ -536,7 +536,7 @@ export default function DashboardSplitViewer() {
   }, [])
 
   return (
-    <div className="dashboard-viewer-container relative w-full h-full">
+    <div className="dashboard-viewer-container relative w-full h-full flex-1">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50">
           <div className="text-muted-foreground">Loading 360° images...</div>
@@ -669,7 +669,7 @@ export default function DashboardSplitViewer() {
 
         {/* Bottom Navigation - conditional based on view mode */}
         <div 
-          className="absolute bottom-8 left-6 z-[1002]"
+          className="absolute bottom-6 left-6 z-[1002]"
           style={{ 
             width: viewMode === 'single' ? 'calc(100% - 48px)' : bottomNavWidth,
             maxWidth: viewMode === 'single' ? 'calc(100% - 48px)' : bottomNavWidth
@@ -748,7 +748,7 @@ export default function DashboardSplitViewer() {
         {/* Bottom Navigation (No Split) - positioned at bottom of right pane - only show in split mode */}
         {viewMode === 'split' && (
           <div 
-            className="absolute bottom-8 z-[1002]"
+            className="absolute bottom-6 z-[1002]"
             style={{ 
               left: bottomNavRightLeft,
               width: bottomNavRightWidth,
