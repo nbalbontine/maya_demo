@@ -22,8 +22,6 @@ import Link from "next/link"
 import { Toaster } from "sonner"
 import SplitViewer from "@/components/maya_components/ui/split-viewer"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
 
 export default function UIShowcase() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -630,55 +628,6 @@ export default function UIShowcase() {
         {/* Base UI Components */}
         <section className="space-y-6">
           <h2 className="text-3xl font-bold text-slate-900">Base UI Components</h2>
-          
-          {/* Sidebar */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                📂 Sidebar Navigation
-              </CardTitle>
-              <CardDescription>
-                Collapsible sidebar with navigation menu, user profile, and search functionality
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-slate-50 rounded-lg p-4">
-                <div className="h-96 w-full border rounded-lg overflow-hidden bg-white">
-                  <SidebarProvider defaultOpen={true}>
-                    <div className="flex h-full w-full">
-                      <AppSidebar />
-                      <SidebarInset>
-                        <div className="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-indigo-100">
-                          <div className="text-center space-y-2">
-                            <div className="text-lg font-semibold text-slate-700">Main Content Area</div>
-                            <div className="text-sm text-slate-500">
-                              Sidebar content appears to the left
-                            </div>
-                            <div className="text-xs text-slate-400">
-                              Try clicking on different navigation items
-                            </div>
-                          </div>
-                        </div>
-                      </SidebarInset>
-                    </div>
-                  </SidebarProvider>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-700">Features</h4>
-                <ul className="text-sm text-slate-600 space-y-1 pl-4">
-                  <li>• Collapsible sidebar with icon and expanded states</li>
-                  <li>• Navigation menu with tooltips when collapsed</li>
-                  <li>• Search functionality with input field</li>
-                  <li>• User profile section with avatar and details</li>
-                  <li>• Mobile-responsive with sheet overlay</li>
-                  <li>• Keyboard shortcut (Cmd/Ctrl + B) to toggle</li>
-                  <li>• Smooth animations and transitions</li>
-                  <li>• Email-style dual sidebar layout</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Calendar */}
           <Card>
@@ -745,7 +694,7 @@ export default function UIShowcase() {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-blue-600">15</div>
+                <div className="text-3xl font-bold text-blue-600">14</div>
                 <p className="text-sm text-slate-600">Total Components</p>
               </div>
               <div className="text-center space-y-2">
