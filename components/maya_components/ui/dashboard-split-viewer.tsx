@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
-import Viewer360 from './viewer360'
+import Viewer360, { IssueMarker } from './viewer360'
 import { BottomNavigationHalfLeft } from './bottom_navigation_half_left'
 import { BottomNavigation as BottomNavigationNoSplit } from './bottom-navigation-half_right'
 import { BottomNavigation as BottomNavigationFullScreen } from './bottom-navigation-full-screen'
@@ -11,8 +11,18 @@ import { cn } from '@/lib/utils'
 
 export default function DashboardSplitViewer() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const viewer1Ref = useRef<{ updateCamera: (rotY: number, rotX: number, fov: number) => void; render: () => void; resize: (width: number, height: number) => void } | null>(null)
-  const viewer2Ref = useRef<{ updateCamera: (rotY: number, rotX: number, fov: number) => void; render: () => void; resize: (width: number, height: number) => void } | null>(null)
+  const viewer1Ref = useRef<{ 
+    updateCamera: (rotY: number, rotX: number, fov: number) => void; 
+    render: () => void; 
+    resize: (width: number, height: number) => void;
+    addIssueAtPosition: (x: number, y: number) => void;
+  } | null>(null)
+  const viewer2Ref = useRef<{ 
+    updateCamera: (rotY: number, rotX: number, fov: number) => void; 
+    render: () => void; 
+    resize: (width: number, height: number) => void;
+    addIssueAtPosition: (x: number, y: number) => void;
+  } | null>(null)
   const viewer1ContainerRef = useRef<HTMLDivElement>(null)
   const viewer2ContainerRef = useRef<HTMLDivElement>(null)
   const splitLineRef = useRef<HTMLDivElement>(null)
@@ -37,6 +47,7 @@ export default function DashboardSplitViewer() {
   const [viewMode, setViewMode] = useState<'single' | 'split'>('split') // View mode state
   const [currentImageIndex, setCurrentImageIndex] = useState(0) // Current image index for both viewers - start at 00
   const [isAddIssueMode, setIsAddIssueMode] = useState(false) // Add issue cursor mode
+  const [issueMarkers, setIssueMarkers] = useState<IssueMarker[]>([]) // Issue markers storage
   
   // Function to sync states when locking/unlocking
   const toggleLock = useCallback(() => {
@@ -233,12 +244,38 @@ export default function DashboardSplitViewer() {
     return relativeX <= splitPosition ? 'viewer1' : 'viewer2'
   }, [splitPosition])
 
+  // Handle issue marker addition
+  const handleIssueAdd = useCallback((marker: IssueMarker) => {
+    setIssueMarkers(prev => [...prev, marker])
+    console.log('Issue marker added:', marker)
+  }, [])
+
   // Mouse event handlers
   const handleMouseDown = useCallback((event: React.MouseEvent) => {
     if ((event.target as Element).closest('.dashboard-split-line')) return
     
-    // If in add issue mode, deactivate it when clicking on 360 photo
+    // If in add issue mode, place issue marker and deactivate mode
     if (isAddIssueMode) {
+      const activeViewer = getActiveViewer(event.clientX)
+      
+      if (activeViewer === 'viewer1') {
+        const viewer1Container = viewer1ContainerRef.current
+        if (viewer1Container) {
+          const viewer1Rect = viewer1Container.getBoundingClientRect()
+          const relativeX = event.clientX - viewer1Rect.left
+          const relativeY = event.clientY - viewer1Rect.top
+          viewer1Ref.current?.addIssueAtPosition(relativeX, relativeY)
+        }
+      } else if (activeViewer === 'viewer2') {
+        const viewer2Container = viewer2ContainerRef.current
+        if (viewer2Container) {
+          const viewer2Rect = viewer2Container.getBoundingClientRect()
+          const relativeX = event.clientX - viewer2Rect.left
+          const relativeY = event.clientY - viewer2Rect.top
+          viewer2Ref.current?.addIssueAtPosition(relativeX, relativeY)
+        }
+      }
+      
       setIsAddIssueMode(false)
       return
     }
@@ -580,6 +617,9 @@ export default function DashboardSplitViewer() {
             containerId="dashboard-viewer1"
             onLoad={onImageLoad}
             onError={onImageError}
+            onIssueAdd={handleIssueAdd}
+            isAddIssueMode={isAddIssueMode}
+            issues={issueMarkers.filter(marker => marker.viewerId === 'dashboard-viewer1')}
           />
         </div>
         
@@ -601,6 +641,9 @@ export default function DashboardSplitViewer() {
             containerId="dashboard-viewer2"
             onLoad={onImageLoad}
             onError={onImageError}
+            onIssueAdd={handleIssueAdd}
+            isAddIssueMode={isAddIssueMode}
+            issues={issueMarkers.filter(marker => marker.viewerId === 'dashboard-viewer2')}
           />
         </div>
         
