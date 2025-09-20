@@ -12,7 +12,7 @@ import { CalendarToolbar } from "@/components/maya_components/ui/calendar-toolba
 import { LocationToolbar } from "@/components/maya_components/ui/location-toolbar"
 import { LocationToolbarMin } from "@/components/maya_components/ui/location-toolbar-min"
 import { ViewmodeToolbar } from "@/components/maya_components/ui/viewmode-toolbar"
-import { SplitscreenToolbar } from "@/components/maya_components/ui/splitscreen-toolbar"
+import { SplitscreenToolbar, SplitscreenToolbarFullScreen, SplitscreenToolbarTwo } from "@/components/maya_components/ui/splitscreen-toolbar"
 import { FloorMap } from "@/components/maya_components/ui/floor-map"
 import { GPSLocatorDemo } from "@/components/maya_components/ui/gps-locator"
 import { ToolbarMainDemo } from "@/components/maya_components/ui/toolbar-main"
@@ -385,18 +385,48 @@ export default function UIShowcase() {
                 🔀 Split Screen Toolbar
               </CardTitle>
               <CardDescription>
-                Controls for split screen functionality
+                Controls for split screen functionality - available in multiple variants
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-slate-50 rounded-lg p-4">
-                <SplitscreenToolbar
-                  onViewChange={handleViewChange}
-                />
+            <CardContent className="space-y-6">
+              {/* Original Component */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Original Component</h4>
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <SplitscreenToolbar
+                    onViewChange={handleViewChange}
+                  />
+                </div>
+                <p className="text-sm text-slate-600">
+                  Original split screen toolbar component with single and split view controls
+                </p>
               </div>
-              <p className="text-sm text-slate-600">
-                Toggle between single and split screen views
-              </p>
+
+              {/* Full Screen Variant */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Full Screen Variant</h4>
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <SplitscreenToolbarFullScreen
+                    onViewChange={handleViewChange}
+                  />
+                </div>
+                <p className="text-sm text-slate-600">
+                  Full screen optimized variant with identical functionality
+                </p>
+              </div>
+
+              {/* Two Variant */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-slate-700">Variant Two</h4>
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <SplitscreenToolbarTwo
+                    onViewChange={handleViewChange}
+                  />
+                </div>
+                <p className="text-sm text-slate-600">
+                  Alternative variant with identical functionality for different use cases
+                </p>
+              </div>
             </CardContent>
           </Card>
 

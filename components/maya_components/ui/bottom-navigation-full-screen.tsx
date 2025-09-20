@@ -4,7 +4,7 @@ import * as React from "react"
 import { CalendarToolbar } from "@/components/maya_components/ui/calendar-toolbar"
 import { LocationToolbar } from "@/components/maya_components/ui/location-toolbar"
 import { ViewmodeToolbar } from "@/components/maya_components/ui/viewmode-toolbar"
-import { SplitscreenToolbar } from "@/components/maya_components/ui/splitscreen-toolbar"
+import { SplitscreenToolbarTwo } from "@/components/maya_components/ui/splitscreen-toolbar"
 import { cn } from "@/lib/utils"
 
 interface BottomNavigationProps {
@@ -135,7 +135,7 @@ const BottomNavigation = React.forwardRef<
           "sm:relative sm:right-auto sm:bottom-auto sm:ml-4",
           "shrink-0"
         )}>
-          <SplitscreenToolbar
+          <SplitscreenToolbarTwo
             onViewChange={splitScreen?.onViewChange}
           />
         </div>

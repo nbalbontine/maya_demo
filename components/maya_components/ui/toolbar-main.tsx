@@ -1,4 +1,4 @@
-"use client"
+image.png"use client"
 
 import {
   ActionToolbarAddLayer,

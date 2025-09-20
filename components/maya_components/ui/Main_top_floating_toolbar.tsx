@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Plus, Camera, Wand2, ChevronDown, ArrowLeft } from "lucide-react"
+import { Camera, Wand2, ChevronDown } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -11,13 +12,12 @@ interface MainTopFloatingToolbarProps {
   onAddClick?: () => void
   onCameraClick?: () => void
   onMagicWandClick?: () => void
-  onBackClick?: () => void
 }
 
 const MainTopFloatingToolbar = React.forwardRef<
   HTMLDivElement,
   MainTopFloatingToolbarProps
->(({ className, onAddClick, onCameraClick, onMagicWandClick, onBackClick, ...props }, ref) => {
+>(({ className, onAddClick, onCameraClick, onMagicWandClick, ...props }, ref) => {
   return (
     <div
       ref={ref}
@@ -27,24 +27,6 @@ const MainTopFloatingToolbar = React.forwardRef<
       )}
       {...props}
     >
-      {/* Back Button */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 transition-colors"
-            onClick={onBackClick}
-            aria-label="Go back"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" sideOffset={8}>
-          Back
-        </TooltipContent>
-      </Tooltip>
-
       {/* Add Button */}
       <Tooltip>
         <TooltipTrigger asChild>
@@ -55,7 +37,13 @@ const MainTopFloatingToolbar = React.forwardRef<
             onClick={onAddClick}
             aria-label="Add item"
           >
-            <Plus className="h-4 w-4" />
+            <Image 
+              src="/Icons/add_issue.svg" 
+              alt="Add issue" 
+              width={24} 
+              height={24}
+              className="h-4 w-4"
+            />
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom" sideOffset={8}>

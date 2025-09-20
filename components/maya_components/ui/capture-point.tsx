@@ -29,10 +29,8 @@ export function CapturePoint({
   className
 }: CapturePointProps) {
   const getPointColor = () => {
-    if (isStart) return "#22c55e" // green-500
-    if (isEnd) return "#ef4444" // red-500
     if (isSelected) return "#3b82f6" // blue-500
-    return "#89C6ED" // Sky blue from Figma
+    return "#89C6ED" // Sky blue from Figma - consistent for all points including start/end
   }
 
   const getPointSize = () => {
