@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Camera, Wand2, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
@@ -38,7 +38,7 @@ const MainTopFloatingToolbar = React.forwardRef<
             aria-label="Add item"
           >
             <Image 
-              src="/Icons/add_issue.svg" 
+              src="/Icons/add_issue6.svg" 
               alt="Add issue" 
               width={24} 
               height={24}
@@ -61,7 +61,13 @@ const MainTopFloatingToolbar = React.forwardRef<
             onClick={onCameraClick}
             aria-label="Take photo"
           >
-            <Camera className="h-4 w-4" />
+            <Image 
+              src="/Icons/addview6.svg" 
+              alt="Add view" 
+              width={24} 
+              height={24}
+              className="h-4 w-4"
+            />
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom" sideOffset={8}>
@@ -79,7 +85,13 @@ const MainTopFloatingToolbar = React.forwardRef<
             onClick={onMagicWandClick}
             aria-label="Magic tools"
           >
-            <Wand2 className="h-4 w-4" />
+            <Image 
+              src="/Icons/mark-up5.svg" 
+              alt="Add mark-up" 
+              width={24} 
+              height={24}
+              className="h-4 w-4"
+            />
             <ChevronDown className="h-3 w-3" />
           </Button>
         </TooltipTrigger>

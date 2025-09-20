@@ -1,6 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface SplitscreenToolbarProps {
   className?: string
@@ -27,28 +28,13 @@ export function SplitscreenToolbarFullScreen({ className, onViewChange }: Splits
           className="bg-white hover:bg-button-hover active:bg-gray-100 transition-colors flex gap-2.5 items-center justify-center p-2 relative rounded shrink-0 group"
         >
           <div className="flex items-center justify-center overflow-hidden p-0 relative shrink-0 size-4">
-            <div className="relative shrink-0 size-3">
-              {/* Single pane icon */}
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="block max-w-none size-full"
-              >
-                <rect
-                  x="1"
-                  y="1"
-                  width="10"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-              </svg>
-            </div>
+            <Image 
+              src="/Icons/one_Screen.svg" 
+              alt="Single view" 
+              width={16} 
+              height={16}
+              className="h-4 w-4"
+            />
           </div>
         </button>
       </div>
@@ -76,38 +62,13 @@ export function SplitscreenToolbarTwo({ className, onViewChange }: SplitscreenTo
           className="bg-white hover:bg-button-hover active:bg-gray-100 transition-colors flex gap-2.5 items-center justify-center p-2 relative rounded shrink-0 group"
         >
           <div className="flex items-center justify-center p-0 relative shrink-0 size-4">
-            <div className="relative shrink-0 size-3">
-              {/* Split pane icon */}
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="block max-w-none size-full"
-              >
-                <rect
-                  x="1"
-                  y="1"
-                  width="4"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-                <rect
-                  x="7"
-                  y="1"
-                  width="4"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-              </svg>
-            </div>
+            <Image 
+              src="/Icons/twoscreen.svg" 
+              alt="Split view" 
+              width={16} 
+              height={16}
+              className="h-4 w-4"
+            />
           </div>
         </button>
       </div>
@@ -139,28 +100,13 @@ export function SplitscreenToolbar({ className, onViewChange }: SplitscreenToolb
           className="bg-white hover:bg-button-hover active:bg-gray-100 transition-colors flex gap-2.5 items-center justify-center p-2 relative rounded shrink-0 group"
         >
           <div className="flex items-center justify-center overflow-hidden p-0 relative shrink-0 size-4">
-            <div className="relative shrink-0 size-3">
-              {/* Single pane icon */}
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="block max-w-none size-full"
-              >
-                <rect
-                  x="1"
-                  y="1"
-                  width="10"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-              </svg>
-            </div>
+            <Image 
+              src="/Icons/one_Screen.svg" 
+              alt="Single view" 
+              width={16} 
+              height={16}
+              className="h-4 w-4"
+            />
           </div>
         </button>
 
@@ -170,38 +116,13 @@ export function SplitscreenToolbar({ className, onViewChange }: SplitscreenToolb
           className="bg-white hover:bg-button-hover active:bg-gray-100 transition-colors flex gap-2.5 items-center justify-center p-2 relative rounded shrink-0 group"
         >
           <div className="flex items-center justify-center p-0 relative shrink-0 size-4">
-            <div className="relative shrink-0 size-3">
-              {/* Split pane icon */}
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="block max-w-none size-full"
-              >
-                <rect
-                  x="1"
-                  y="1"
-                  width="4"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-                <rect
-                  x="7"
-                  y="1"
-                  width="4"
-                  height="10"
-                  rx="1"
-                  stroke="#474655"
-                  strokeWidth="1"
-                  fill="none"
-                />
-              </svg>
-            </div>
+            <Image 
+              src="/Icons/twoscreen.svg" 
+              alt="Split view" 
+              width={16} 
+              height={16}
+              className="h-4 w-4"
+            />
           </div>
         </button>
       </div>
