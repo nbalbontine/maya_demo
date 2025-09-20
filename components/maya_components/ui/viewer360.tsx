@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback, forwardRef, useImperativeHandle, useSta
 import * as THREE from 'three'
 import Image from 'next/image'
 
-interface IssueMarker {
+export interface IssueMarker {
   id: string
   position: THREE.Vector3
   screenPosition: { x: number; y: number }
@@ -22,13 +22,13 @@ interface ViewerProps {
   issues?: IssueMarker[]
 }
 
+
 const Viewer360 = ({ 
   imageUrl, 
   containerId, 
   onLoad, 
-  onError, 
+  onError,
   onIssueAdd,
-  isAddIssueMode = false,
   issues = []
 }: ViewerProps, ref: React.Ref<{ 
   updateCamera: (rotY: number, rotX: number, fov: number) => void; 
@@ -45,6 +45,87 @@ const Viewer360 = ({
   const [issueMarkers, setIssueMarkers] = useState<IssueMarker[]>(issues)
   const [, forceUpdate] = useState(0) // Force re-render for marker position updates
   
+  // Sync issues prop with local state
+  useEffect(() => {
+    setIssueMarkers(issues)
+  }, [issues])
+
+  // Function to convert 3D world position to 2D screen coordinates
+  const worldToScreen = useCallback((worldPosition: THREE.Vector3): { x: number; y: number } => {
+    if (!cameraRef.current || !containerRef.current) {
+      return { x: 0, y: 0 }
+    }
+
+    const vector = worldPosition.clone()
+    vector.project(cameraRef.current)
+
+    const container = containerRef.current
+    const rect = container.getBoundingClientRect()
+    
+    const x = (vector.x * 0.5 + 0.5) * rect.width
+    const y = (vector.y * -0.5 + 0.5) * rect.height
+
+    return { x, y }
+  }, [])
+
+  // Function to add issue at screen position with proper coordinate handling
+  const addIssueAtPosition = useCallback((x: number, y: number) => {
+    if (!cameraRef.current || !sphereRef.current || !containerRef.current) {
+      console.warn('Cannot add issue: camera, sphere, or container not ready')
+      return
+    }
+
+    const container = containerRef.current
+    const rect = container.getBoundingClientRect()
+    
+    // Convert screen coordinates to normalized device coordinates (-1 to 1)
+    const mouse = new THREE.Vector2()
+    mouse.x = (x / rect.width) * 2 - 1
+    mouse.y = -(y / rect.height) * 2 + 1
+
+    // Use raycaster to find intersection with sphere
+    const raycaster = raycasterRef.current
+    raycaster.setFromCamera(mouse, cameraRef.current)
+    
+    const intersects = raycaster.intersectObject(sphereRef.current)
+    
+    if (intersects.length > 0) {
+      const intersectionPoint = intersects[0].point
+      
+      // Create new issue marker
+      const newMarker: IssueMarker = {
+        id: `issue-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        position: intersectionPoint.clone(),
+        screenPosition: { x, y },
+        timestamp: Date.now(),
+        viewerId: containerId
+      }
+
+      // Add to local state
+      setIssueMarkers(prev => [...prev, newMarker])
+      
+      // Notify parent component
+      onIssueAdd?.(newMarker)
+      
+      console.log('Issue marker added:', newMarker)
+    } else {
+      console.warn('No intersection found with sphere')
+    }
+  }, [containerId, onIssueAdd])
+
+  // Update marker screen positions when camera changes
+  const updateMarkerPositions = useCallback(() => {
+    if (issueMarkers.length > 0) {
+      setIssueMarkers(prev => 
+        prev.map(marker => ({
+          ...marker,
+          screenPosition: worldToScreen(marker.position)
+        }))
+      )
+      forceUpdate(prev => prev + 1)
+    }
+  }, [issueMarkers.length, worldToScreen])
+
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -122,11 +203,6 @@ const Viewer360 = ({
     }
   }, [imageUrl, onLoad, onError])
 
-  // Update issue markers when props change
-  useEffect(() => {
-    setIssueMarkers(issues)
-  }, [issues])
-
   const updateCamera = useCallback((rotationY: number, rotationX: number, fov: number) => {
     if (cameraRef.current) {
       cameraRef.current.rotation.order = 'YXZ'
@@ -134,14 +210,15 @@ const Viewer360 = ({
       cameraRef.current.rotation.x = rotationX
       cameraRef.current.fov = fov
       cameraRef.current.updateProjectionMatrix()
+      
+      // Update marker positions when camera changes
+      updateMarkerPositions()
     }
-  }, [])
+  }, [updateMarkerPositions])
 
   const render = useCallback(() => {
     if (rendererRef.current && sceneRef.current && cameraRef.current) {
       rendererRef.current.render(sceneRef.current, cameraRef.current)
-      // Update marker positions when rendering
-      forceUpdate(prev => prev + 1)
     }
   }, [])
 
@@ -150,85 +227,6 @@ const Viewer360 = ({
       cameraRef.current.aspect = width / height
       cameraRef.current.updateProjectionMatrix()
       rendererRef.current.setSize(width, height)
-    }
-  }, [])
-
-  // Convert 2D screen coordinates to 3D world position using raycasting
-  const addIssueAtPosition = useCallback((x: number, y: number) => {
-    if (!cameraRef.current || !sphereRef.current || !rendererRef.current) return
-
-    const container = containerRef.current
-    if (!container) return
-
-    // Get the canvas element (renderer's DOM element)
-    const canvas = rendererRef.current.domElement
-    const canvasRect = canvas.getBoundingClientRect()
-    
-    // Convert screen coordinates to normalized device coordinates (-1 to +1)
-    // Use canvas coordinates, not container coordinates
-    const mouse = new THREE.Vector2()
-    mouse.x = ((x - canvasRect.left) / canvasRect.width) * 2 - 1
-    mouse.y = -((y - canvasRect.top) / canvasRect.height) * 2 + 1
-
-    console.log('Click coordinates:', { x, y })
-    console.log('Canvas rect:', canvasRect)
-    console.log('Normalized mouse:', mouse)
-
-    // Update raycaster
-    raycasterRef.current.setFromCamera(mouse, cameraRef.current)
-
-    // Find intersection with sphere
-    const intersects = raycasterRef.current.intersectObject(sphereRef.current)
-    
-    if (intersects.length > 0) {
-      const intersectionPoint = intersects[0].point
-      
-      // Create new issue marker
-      const newMarker: IssueMarker = {
-        id: `${containerId}-issue-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-        position: intersectionPoint.clone(),
-        screenPosition: { x, y },
-        timestamp: Date.now(),
-        viewerId: containerId
-      }
-
-      // Add to local state
-      setIssueMarkers(prev => [...prev, newMarker])
-      
-      // Notify parent component
-      onIssueAdd?.(newMarker)
-      
-      console.log('Issue marker added at 3D position:', intersectionPoint, 'in viewer:', containerId)
-      console.log('Intersection details:', intersects[0])
-    } else {
-      console.log('No intersection found with sphere')
-    }
-  }, [onIssueAdd, containerId])
-
-  // Calculate screen position for 3D markers
-  const getScreenPosition = useCallback((worldPosition: THREE.Vector3) => {
-    if (!cameraRef.current || !rendererRef.current) return null
-
-    // Clone the world position to avoid modifying the original
-    const vector = worldPosition.clone()
-    
-    // Project the 3D position to screen coordinates
-    vector.project(cameraRef.current)
-
-    const canvas = rendererRef.current.domElement
-    const canvasRect = canvas.getBoundingClientRect()
-    
-    // Convert from normalized device coordinates (-1 to 1) to canvas pixels
-    const x = (vector.x * 0.5 + 0.5) * canvasRect.width
-    const y = (vector.y * -0.5 + 0.5) * canvasRect.height
-
-    // Simple visibility check - if z > 1, the point is behind the camera
-    const isVisible = vector.z < 1
-
-    return { 
-      x: x, // Canvas-relative coordinates
-      y: y, // Canvas-relative coordinates
-      isVisible: isVisible
     }
   }, [])
 
@@ -241,20 +239,18 @@ const Viewer360 = ({
   }), [updateCamera, render, resize, addIssueAtPosition])
 
   return (
-    <div ref={containerRef} id={containerId} className="viewer-split relative overflow-hidden">
+    <div ref={containerRef} id={containerId} className="viewer-split relative">
       {/* Issue markers overlay */}
       {issueMarkers.map((marker) => {
-        const screenPos = getScreenPosition(marker.position)
-        if (!screenPos || !screenPos.isVisible) return null
-
+        const screenPos = worldToScreen(marker.position)
         return (
           <div
             key={marker.id}
             className="absolute pointer-events-none z-10"
             style={{
-              left: `${screenPos.x}px`,
-              top: `${screenPos.y}px`,
-              transform: 'translate(-50%, -50%)'
+              left: `${screenPos.x - 12}px`, // Center the 24px icon
+              top: `${screenPos.y - 12}px`,
+              transform: 'translate(0, 0)', // Prevent sub-pixel rendering issues
             }}
           >
             <Image
@@ -272,4 +268,3 @@ const Viewer360 = ({
 }
 
 export default forwardRef(Viewer360)
-export type { IssueMarker }

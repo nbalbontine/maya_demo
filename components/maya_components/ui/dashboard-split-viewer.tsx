@@ -261,17 +261,43 @@ export default function DashboardSplitViewer() {
       if (activeViewer === 'viewer1') {
         const viewer1Container = viewer1ContainerRef.current
         if (viewer1Container) {
+          // Get the viewer container's bounding rect
           const viewer1Rect = viewer1Container.getBoundingClientRect()
+          
+          // Calculate relative coordinates within the viewer container
+          // These coordinates are already properly offset because getBoundingClientRect()
+          // returns the position relative to the viewport, accounting for all layout offsets
           const relativeX = event.clientX - viewer1Rect.left
           const relativeY = event.clientY - viewer1Rect.top
+          
+          console.log('Viewer1 click:', { 
+            clientX: event.clientX, 
+            clientY: event.clientY, 
+            viewer1Rect, 
+            relativeX, 
+            relativeY 
+          })
+          
           viewer1Ref.current?.addIssueAtPosition(relativeX, relativeY)
         }
       } else if (activeViewer === 'viewer2') {
         const viewer2Container = viewer2ContainerRef.current
         if (viewer2Container) {
+          // Get the viewer container's bounding rect
           const viewer2Rect = viewer2Container.getBoundingClientRect()
+          
+          // Calculate relative coordinates within the viewer container
           const relativeX = event.clientX - viewer2Rect.left
           const relativeY = event.clientY - viewer2Rect.top
+          
+          console.log('Viewer2 click:', { 
+            clientX: event.clientX, 
+            clientY: event.clientY, 
+            viewer2Rect, 
+            relativeX, 
+            relativeY 
+          })
+          
           viewer2Ref.current?.addIssueAtPosition(relativeX, relativeY)
         }
       }
