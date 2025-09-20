@@ -54,7 +54,7 @@ export default function UIShowcase() {
     onBack: () => console.log("Back button clicked"),
     onAdd: () => console.log("Add button clicked"),
     onPhoto: () => console.log("Photo button clicked"),
-    onMenuAction: () => console.log("Menu action clicked")
+    onMagicWand: () => console.log("Magic wand clicked")
   }
 
   const handleToolbarActions = {
@@ -111,7 +111,7 @@ export default function UIShowcase() {
                     onBack={handleTopNavigation.onBack}
                     onAdd={handleTopNavigation.onAdd}
                     onPhoto={handleTopNavigation.onPhoto}
-                    onMenuAction={handleTopNavigation.onMenuAction}
+                    onMagicWand={handleTopNavigation.onMagicWand}
                   />
                 </div>
                 <p className="text-sm text-slate-600">
@@ -127,7 +127,7 @@ export default function UIShowcase() {
                     onBack={handleTopNavigation.onBack}
                     onAdd={handleTopNavigation.onAdd}
                     onPhoto={handleTopNavigation.onPhoto}
-                    onMenuAction={handleTopNavigation.onMenuAction}
+                    onMagicWand={handleTopNavigation.onMagicWand}
                   />
                 </div>
                 <p className="text-sm text-slate-600">

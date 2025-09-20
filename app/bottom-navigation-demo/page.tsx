@@ -34,7 +34,7 @@ export default function BottomNavigationDemo() {
     onBack: () => console.log("Back button clicked"),
     onAdd: () => console.log("Add button clicked"),
     onPhoto: () => console.log("Photo button clicked"),
-    onMenuAction: () => console.log("Menu action clicked")
+    onMagicWand: () => console.log("Magic wand clicked")
   }
 
   return (
@@ -44,7 +44,7 @@ export default function BottomNavigationDemo() {
         onBack={handleTopNavigation.onBack}
         onAdd={handleTopNavigation.onAdd}
         onPhoto={handleTopNavigation.onPhoto}
-        onMenuAction={handleTopNavigation.onMenuAction}
+        onMagicWand={handleTopNavigation.onMagicWand}
       />
 
       {/* Empty space between top and bottom navigation */}
