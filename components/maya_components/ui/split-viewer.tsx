@@ -642,7 +642,7 @@ export default function SplitViewer() {
             onBack={() => console.log('Back button clicked')}
             onAdd={() => console.log('Add button clicked')}
             onPhoto={() => console.log('Photo button clicked')}
-            onMenuAction={() => console.log('Menu action clicked')}
+            onMagicWand={() => console.log('Menu action clicked')}
             className="w-full"
           />
         </div>
@@ -662,6 +662,7 @@ export default function SplitViewer() {
               onAdd={() => console.log('Right Add button clicked')}
               onPhoto={() => console.log('Right Photo button clicked')}
               onMenuAction={() => console.log('Right Menu action clicked')}
+              onViewChange={setViewMode}
               className="w-full"
             />
           </div>

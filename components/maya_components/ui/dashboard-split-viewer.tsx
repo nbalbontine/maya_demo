@@ -7,6 +7,7 @@ import { BottomNavigation as BottomNavigationNoSplit } from './bottom-navigation
 import { BottomNavigation as BottomNavigationFullScreen } from './bottom-navigation-full-screen'
 import { TopNavigation } from './top-navigation'
 import { TopNavigationRight } from './top-navigation-right'
+import { cn } from '@/lib/utils'
 
 export default function DashboardSplitViewer() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -35,6 +36,7 @@ export default function DashboardSplitViewer() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [viewMode, setViewMode] = useState<'single' | 'split'>('split') // View mode state
   const [currentImageIndex, setCurrentImageIndex] = useState(0) // Current image index for both viewers - start at 00
+  const [isAddIssueMode, setIsAddIssueMode] = useState(false) // Add issue cursor mode
   
   // Function to sync states when locking/unlocking
   const toggleLock = useCallback(() => {
@@ -235,6 +237,12 @@ export default function DashboardSplitViewer() {
   const handleMouseDown = useCallback((event: React.MouseEvent) => {
     if ((event.target as Element).closest('.dashboard-split-line')) return
     
+    // If in add issue mode, deactivate it when clicking on 360 photo
+    if (isAddIssueMode) {
+      setIsAddIssueMode(false)
+      return
+    }
+    
     if (isLocked) {
       // Locked mode: use shared state
       const state = mouseStateRef.current
@@ -257,7 +265,7 @@ export default function DashboardSplitViewer() {
         state.mouseY = event.clientY
       }
     }
-  }, [isLocked, getActiveViewer])
+  }, [isLocked, getActiveViewer, isAddIssueMode])
 
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
     const sharedState = mouseStateRef.current
@@ -545,7 +553,10 @@ export default function DashboardSplitViewer() {
       
       <div 
         ref={containerRef}
-        className="dashboard-viewer-main relative w-full h-full overflow-hidden"
+        className={cn(
+          "dashboard-viewer-main relative w-full h-full overflow-hidden",
+          isAddIssueMode && "add-issue-cursor"
+        )}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -642,8 +653,10 @@ export default function DashboardSplitViewer() {
             onBack={() => console.log('Back button clicked')}
             onAdd={() => console.log('Add button clicked')}
             onPhoto={() => console.log('Photo button clicked')}
-            onMenuAction={() => console.log('Menu action clicked')}
+            onMagicWand={() => console.log('Menu action clicked')}
             className="w-full"
+            isAddIssueMode={isAddIssueMode}
+            onAddIssueModeChange={setIsAddIssueMode}
           />
         </div>
 
@@ -662,7 +675,10 @@ export default function DashboardSplitViewer() {
               onAdd={() => console.log('Right Add button clicked')}
               onPhoto={() => console.log('Right Photo button clicked')}
               onMenuAction={() => console.log('Right Menu action clicked')}
+              onViewChange={setViewMode}
               className="w-full"
+              isAddIssueMode={isAddIssueMode}
+              onAddIssueModeChange={setIsAddIssueMode}
             />
           </div>
         )}

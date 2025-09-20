@@ -14,6 +14,8 @@ interface TopNavigationProps {
   onPhoto?: () => void
   onMagicWand?: () => void
   className?: string
+  isAddIssueMode?: boolean
+  onAddIssueModeChange?: (isActive: boolean) => void
 }
 
 export function TopNavigation({ 
@@ -21,7 +23,9 @@ export function TopNavigation({
   onAdd, 
   onPhoto, 
   onMagicWand,
-  className 
+  className,
+  isAddIssueMode,
+  onAddIssueModeChange
 }: TopNavigationProps) {
   return (
     <div 
@@ -50,10 +54,11 @@ export function TopNavigation({
         {/* Main toolbar - centered */}
         <div className="basis-0 content-stretch flex flex-col gap-2.5 grow items-center justify-start min-h-px min-w-px relative shrink-0">
           <MainTopFloatingToolbar
-            onBackClick={onBack}
             onAddClick={onAdd}
             onCameraClick={onPhoto}
             onMagicWandClick={onMagicWand}
+            isAddIssueMode={isAddIssueMode}
+            onAddIssueModeChange={onAddIssueModeChange}
           />
         </div>
       </div>

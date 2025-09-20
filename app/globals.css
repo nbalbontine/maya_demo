@@ -276,3 +276,12 @@
   background: currentColor;
   opacity: 0.3;
 }
+
+/* Add Issue Mode Cursor */
+.add-issue-cursor {
+  cursor: url('/Icons/aim.svg') 12 12, crosshair !important;
+}
+
+.add-issue-cursor * {
+  cursor: url('/Icons/aim.svg') 12 12, crosshair !important;
+}

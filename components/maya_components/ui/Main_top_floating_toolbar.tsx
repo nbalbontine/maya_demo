@@ -12,12 +12,14 @@ interface MainTopFloatingToolbarProps {
   onAddClick?: () => void
   onCameraClick?: () => void
   onMagicWandClick?: () => void
+  isAddIssueMode?: boolean
+  onAddIssueModeChange?: (isActive: boolean) => void
 }
 
 const MainTopFloatingToolbar = React.forwardRef<
   HTMLDivElement,
   MainTopFloatingToolbarProps
->(({ className, onAddClick, onCameraClick, onMagicWandClick, ...props }, ref) => {
+>(({ className, onAddClick, onCameraClick, onMagicWandClick, isAddIssueMode = false, onAddIssueModeChange, ...props }, ref) => {
   return (
     <div
       ref={ref}
@@ -33,8 +35,15 @@ const MainTopFloatingToolbar = React.forwardRef<
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 transition-colors"
-            onClick={onAddClick}
+            className={cn(
+              "h-8 w-8 transition-colors",
+              isAddIssueMode && "bg-blue-100 text-blue-600 hover:bg-blue-200"
+            )}
+            onClick={() => {
+              const newMode = !isAddIssueMode
+              onAddIssueModeChange?.(newMode)
+              onAddClick?.()
+            }}
             aria-label="Add item"
           >
             <Image 
@@ -47,7 +56,7 @@ const MainTopFloatingToolbar = React.forwardRef<
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom" sideOffset={8}>
-          Add issue
+          {isAddIssueMode ? "Exit add issue mode" : "Add issue"}
         </TooltipContent>
       </Tooltip>
 
